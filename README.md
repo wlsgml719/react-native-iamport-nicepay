@@ -1,1 +1,1 @@
-# react-native-iap-android
+# react-native-iamport-nicepay
