@@ -8,7 +8,7 @@ import {
   TextInput,
 } from 'react-native';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [product, setProduct] = useState({prod_amount: '', prod_name: ''});
 
   const handleChange = (text) => {
@@ -16,6 +16,7 @@ const Home = () => {
   };
   const handleBilling = () => {
     console.log('간편 카드 등록 결제');
+    navigation.navigate('Payment');
   };
 
   return (
