@@ -6,7 +6,7 @@ import Data from '../../../personal.json';
 const Payment = ({navigation, route}) => {
   const data = {
     pg: 'nice',
-    pay_method: route.params?.type || 'card',
+    pay_method: route.params?.type,
     name: '아임포트 결제데이터 분석',
     merchant_uid: `mid_${new Date().getTime()}`,
     amount: '1000',
@@ -18,10 +18,6 @@ const Payment = ({navigation, route}) => {
     app_scheme: 'example',
     digital: route.params?.digital,
   };
-
-  //   useEffect(() => {
-  //     if(route.params) { setData(route.params) }
-  //   }, [])
 
   const callBack = (res) => {
     console.group('callback');
