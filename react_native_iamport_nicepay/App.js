@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,6 +14,9 @@ import {
   View,
   Text,
   StatusBar,
+  TouchableOpacity,
+  TextInput,
+  Button,
 } from 'react-native';
 
 import {
@@ -24,91 +27,98 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const App: () => React$Node = () => {
+import IMP from 'iamport-react-native';
+
+const App = () => {
+  const [product, setProduct] = useState({prod_amount: '', prod_name: ''});
+
+  const handleChange = (text) => {
+    console.log(text);
+  };
+
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <ScrollView style={styles.container}>
+      <Text style={styles.title}>iamport Nicepay Payments</Text>
+      <View>
+        <Text htmlFor={'prod_name'}>상품명</Text>
+        <TextInput
+          style={styles.prod_name}
+          type={'text'}
+          name={'prod_name'}
+          onChange={handleChange}
+        />
+        <Text htmlFor={'prod_amount'}>가격</Text>
+        <TextInput
+          style={styles.prod_amount}
+          type={'text'}
+          name={'prod_amount'}
+          onChange={handleChange}
+        />
+      </View>
+      <View>
+        <Text>간편 카드 등록 결제</Text>
+        <TouchableOpacity
+          style={styles.pay_billing}
+          onPress={() => console.log('간편 카드 등록 결제')}
+        />
+      </View>
+      <View>
+        <TextInput
+          style={styles.pay_title}
+          type={'radio'}
+          name={'payment_type'}
+        />
+        <Text htmlFor={'default'}>일반 결제</Text>
+
+        <View>
+          <TouchableOpacity
+            style={styles.pay_default}
+            onPress={() => console.log('신용카드')}>
+            <Text>신용카드</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={styles.pay_default}
+            onPress={() => console.log('휴대전화')}>
+            <Text>휴대전화</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  title: {
+    flex: 1,
+    margin: 20,
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  pay_btn: {
+    width: 300,
+    height: 50,
+    margin: 10,
   },
-  body: {
-    backgroundColor: Colors.white,
+  pay_title: {
+    marginBottom: 18,
+    marginRight: 5,
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  pay_billing: {
+    width: 300,
+    height: 200,
+    textAlign: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderRadius: 10,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
+  pay_default: {
+    width: 200,
+    height: 50,
+    backgroundColor: 'white',
+    marginBottom: 5,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+  prod_name: {display: 'flex', width: 200, marginRight: 5, borderWidth: 1},
+  prod_amount: {display: 'flex', width: 200, marginRight: 5, borderWidth: 1},
 });
-
 export default App;
