@@ -14,9 +14,24 @@ const Home = ({navigation}) => {
   const handleChange = (text) => {
     console.log(text);
   };
+
   const handleBilling = () => {
     console.log('간편 카드 등록 결제');
-    navigation.navigate('Payment');
+  };
+
+  const handlePhone = () => {
+    console.log('핸드폰 결제');
+    navigation.navigate('Payment', {
+      type: 'phone',
+      digital: true,
+    });
+  };
+
+  const handleCard = () => {
+    console.log('카드 결제');
+    navigation.navigate('Payment', {
+      type: 'card',
+    });
   };
 
   return (
@@ -37,16 +52,12 @@ const Home = ({navigation}) => {
         <Text htmlFor={'default'}>일반 결제</Text>
 
         <View>
-          <TouchableOpacity
-            style={styles.pay_default}
-            onPress={() => console.log('신용카드')}>
+          <TouchableOpacity style={styles.pay_default} onPress={handleCard}>
             <Text>신용카드</Text>
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity
-            style={styles.pay_default}
-            onPress={() => console.log('휴대전화')}>
+          <TouchableOpacity style={styles.pay_default} onPress={handlePhone}>
             <Text>휴대전화</Text>
           </TouchableOpacity>
         </View>
